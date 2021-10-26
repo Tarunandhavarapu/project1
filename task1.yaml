@@ -1,16 +1,17 @@
 ---
-- hosts: tomcat
-  remote_user: root
+- hosts: webservers
+  remote_user: ubuntu
   become: yes
   tasks:
   - name: Creates directory
     file:
-      path: /home/ubuntu/gitrepo
+      path: /root/newgit
       state: directory
   - name: checkout git repo
     ansible.builtin.git:
       repo: https://github.com/PRATYUSHNAIR1976/pechuwar.git
-      dest: /home/ansible/gitrepo/addressbook.war
+      dest: /root/newgit
+  
   - name: installing tomcat CentOS
     package:
       name: tomcat
@@ -31,11 +32,6 @@
       name: tomcat9
       state: started
     when:  ansible_facts['os_family'] == "Debian"
-  - name: configuration of tomcat CentOS
-    copy:
-      src: /root/tomcat.config
-      dest: /etc/tomcat/tomcat-users.xml
-    when:  ansible_facts['os_family'] == "RedHat"
   - name: starting up tomcat CentOS 
     service:
       name: tomcat
@@ -48,12 +44,12 @@
     when:  ansible_facts['os_family'] == "Debian"
   - name: copying addressbook file CentOS
     copy:
-      src: /home/ansible/gitrepo/addressbook.war
+      src: /root/newgit/addressbook.war
       dest: /usr/share/tomcat/webapps
     when:  ansible_facts['os_family'] == "RedHat"
   - name: copying addressbook file Ubuntu
     copy:
-      src: /home/ansible/gitrepo/addressbook.war
+      src: /root/newgit/addressbook.war
       dest: /var/lib/tomcat9/webapps
     when:  ansible_facts['os_family'] == "Debian"
   - name: starting up tomcat CentOS 
