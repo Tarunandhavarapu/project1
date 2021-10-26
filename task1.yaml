@@ -1,16 +1,16 @@
 ---
 - hosts: tomcat
-  remote_user: root
+  remote_user: ansible
   become: yes
   tasks:
   - name: Creates directory
     file:
-      path: /root/newgit
+      path: /home/ansible/newgit
       state: directory
   - name: checkout git repo
     ansible.builtin.git:
       repo: https://github.com/PRATYUSHNAIR1976/pechuwar.git
-      dest: /root/newgit
+      dest: /home/ansible/newgit
   
   - name: installing tomcat CentOS
     package:
@@ -49,7 +49,7 @@
     when:  ansible_facts['os_family'] == "RedHat"
   - name: copying addressbook file Ubuntu
     copy:
-      src: /root/newgit/addressbook.war
+      src: /home/ansible/newgit/addressbook.war
       dest: /var/lib/tomcat9/webapps
     when:  ansible_facts['os_family'] == "Debian"
   - name: starting up tomcat CentOS 
