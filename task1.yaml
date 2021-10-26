@@ -3,8 +3,8 @@
   remote_user: root
   become: yes
   tasks:
-   - name: Creates directory
-     file:
+  - name: Creates directory
+    file:
       path: /home/ubuntu/gitrepo
       state: directory
   - name: checkout git repo
