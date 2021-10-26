@@ -1,5 +1,5 @@
 ---
-- hosts: webservers
+- hosts: tomcat
   remote_user: ubuntu
   become: yes
   tasks:
