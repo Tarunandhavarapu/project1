@@ -9,7 +9,7 @@
       state: directory
   - name: checkout git repo
     ansible.builtin.git:
-      repo: https://github.com/PRATYUSHNAIR1976/pechuwar.git
+      repo: https://github.com/Tarunandhavarapu/tarunaddressbook.git
       dest: /home/ansible/newgit
   
   - name: installing tomcat CentOS
