@@ -32,16 +32,6 @@
       name: tomcat9
       state: started
     when:  ansible_facts['os_family'] == "Debian"
-  - name: starting up tomcat CentOS 
-    service:
-      name: tomcat
-      state: restarted
-    when:  ansible_facts['os_family'] == "RedHat"
-  - name: starting tomcat Ubuntu
-    service:
-      name: tomcat9
-      state: restarted
-    when:  ansible_facts['os_family'] == "Debian"
   - name: copying addressbook file CentOS
     copy:
       src: /root/newgit/addressbook.war
